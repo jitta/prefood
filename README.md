@@ -1,4 +1,4 @@
-## Incoming Features
+### Incoming Features
 
 - [ ] Summary rating food today to Slack after 15 minutes
 - [ ] Better way to pick up food name
@@ -15,15 +15,3 @@
 - [x] Show other feedback on food today page
 - [x] Responsive image
 - [x] Resize image
-
-### Solar System Exploration, 1950s – 1960s
-
-- [ ] Mercury
-- [x] Venus
-- [x] Earth (Orbit/Moon)
-- [x] Mars
-- [ ] Jupiter
-- [ ] Saturn
-- [ ] Uranus
-- [ ] Neptune
-- [ ] Comet Haley
