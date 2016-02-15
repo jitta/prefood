@@ -24,3 +24,7 @@ footer.page-footer .img-curry {
   margin-top: 5px;
   margin-left: 5px;
 }
+
+.github-badge {
+  display: flex;
+}
