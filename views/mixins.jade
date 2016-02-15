@@ -1,0 +1,17 @@
+mixin feedback(type)
+  -
+    var headerDict = {
+      good: "What went well?",
+      bad: "What didn't go so well?",
+      improve: "What can do better next time?",
+      foodName: "Food name"
+    }
+    var header = headerDict[type] 
+  .row
+    .col.s12.m8
+      ul.collection.with-header
+        li.collection-header
+          h5=header
+        each val in food.ratings
+          if val.feedback[type]
+            li.collection-item= val.feedback[type]

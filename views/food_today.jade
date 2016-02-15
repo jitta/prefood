@@ -1,0 +1,41 @@
+include mixins
+
+doctype html
+html
+  head(lang="en")
+    title Jitta Prefood Today
+    meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+    meta(name="description", content="")
+    meta(name="keywords", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;")
+    link(rel="stylesheet", href="/css/materialize.min.css", type="text/css")
+    link(rel="stylesheet", href="/css/main.css", type="text/css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons", type="text/css")
+  body
+    .container
+      if !food
+        .row
+          .col.s12.m5
+            .card-panel.teal
+              span.white-text No one rate food today.
+      else
+        .card
+          .card-image.waves-block.waves-light
+            img.food-cover(src='/img/card/#{cardImage}' height="500")
+          .card-content
+            .row
+              .col.s12
+                span.card-title.activator.grey-text.text-darken-4
+                  h4 Food for date <b>#{food.cookedDate.toDateString()}</b>
+                p Total people rate are <b>#{food.ratings.length}</b>
+                p Average rating today is <b>#{food.averageRating}</b>
+            +feedback('foodName')
+            +feedback('good')
+            +feedback('bad')
+            +feedback('improve')
+
+
+              
+    script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
+    script(type="text/javascript", src="/js/materialize.min.js")
+    

@@ -1,0 +1,17 @@
+body {
+  background: #E0E4CC;
+}
+form.feedback-form label.active{
+  font-size: 15px;
+  color: #5A5A5A;
+}
+
+.material-icons.star_rate {
+  width: 50px;
+  font-size: 45px;
+}
+
+.food-cover {
+  width: 100%;
+  height: auto;
+}

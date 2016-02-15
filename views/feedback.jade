@@ -1,0 +1,54 @@
+doctype html
+html
+  head(lang="en")
+    title Jitta Prefood Today
+    meta(http-equiv="content-type", content="text/html; charset=UTF-8")
+    meta(name="description", content="")
+    meta(name="keywords", content="")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;")
+    link(rel="stylesheet", href="/css/materialize.min.css", type="text/css")
+    link(rel="stylesheet", href="/css/main.css", type="text/css")
+    link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons", type="text/css")
+    script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
+    script(type="text/javascript", src="/js/materialize.min.js")
+  body
+    .container
+      .row
+        .col.s8
+          form.card.feedback-form(method="POST" action="/food/feedback")
+            .card-content
+                .row.rating
+                  - n = 0
+                  while n < score
+                    span <i class="material-icons star_rate">star_rate</i>
+                    - n++
+                .row
+                  .input-field.col.s12
+                    input#food_name(placeholder='ตั้งชื่ออาหารวันนี้', type='text', name="food_name")
+                    label(for='food_name') Food name
+                .row
+                  .input-field.col.s12
+                    input#feedback_good(placeholder='ไก่กรอบมาก น้ำจิ้มอร่อย', type='text', name="feedback_good")
+                    label(for='feedback_good') What went well?
+                .row
+                  .input-field.col.s12
+                    input#feedback_bad(placeholder='เค็มมาก ปริมาณน้อยไม่พอกิน', type='text', name="feedback_bad")
+                    label(for='feedback_bad') What didn't go so well?
+                .row
+                  .input-field.col.s12
+                    input#feedback_improve(placeholder='ใส่ไก่ให้เยอะกว่านี้ หมักหมูให้นานกว่าเดิม', type='text', name="feedback_improve")
+                    label(for='feedback_improve') What can do better next time?
+                    input(type='hidden', name="score", value="#{score}")
+            .card-action
+              .row
+                .col.s12
+                  button.btn.waves-effect.waves-light(type='submit', name='submit')
+                    | Submit
+                    i.material-icons.right send
+
+
+
+
+              
+
+    
