@@ -15,3 +15,12 @@ form.feedback-form label.active{
   width: 100%;
   height: auto;
 }
+
+footer .footer-copyright .container {
+  display: flex;
+}
+
+footer.page-footer .img-curry {
+  margin-top: 5px;
+  margin-left: 5px;
+}
