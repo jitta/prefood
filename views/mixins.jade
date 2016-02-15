@@ -13,5 +13,5 @@ mixin feedback(type)
         li.collection-header
           h5=header
         each val in food.ratings
-          if val.feedback[type]
+          if val.feedback[type] && val.feedback[type].length > 2
             li.collection-item= val.feedback[type]
