@@ -51,6 +51,10 @@ app.get('/food/today', (req, res) => {
   })
 })
 
+app.get('/', (req, res) => {
+  res.redirect('/food/today')
+})
+
 var port = process.env.PORT || 3002
 app.listen(port, () => {
   console.log(`Prefood listening on ${port}`)
