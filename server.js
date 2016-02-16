@@ -1,10 +1,10 @@
 var express = require('express')
 var fs = require('fs')
+var bodyParser = require('body-parser')
 var app = express()
 var Prefood = require('./models/prefood')
-var slack = require('./slack')
+var slack = require('./lib/slack')
 var helper = require('./lib/helper')
-var bodyParser = require('body-parser')
 
 app.set('view engine', 'jade')
 app.use(bodyParser.json())

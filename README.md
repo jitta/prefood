@@ -7,6 +7,7 @@
 - [ ] Not run cronjob on holidays
 - [ ] Use google image with food name keywords for use as thumbnail
 - [ ] Write ATDD by Robot framework
+- [x] Add food yesterday page
 - [X] Add footer, powered by Jitta Engineer, link to Github
 - [X] Not show feed back when string length < 2
 - [x] Feedback more information, What's good?, What's to improve?
