@@ -37,8 +37,19 @@ app.get('/food/rating/:score', (req, res) => {
 })
 
 app.get('/food/notify', (req, res) => {
-  slack.notifyRating()
-  res.status(200).send('OK')
+  slack.notifyRating((error, results) => {
+    if (error) return res.status(400).json(error)
+
+    res.status(200).json(results)
+  })
+})
+
+app.get('/food/summary_rating', (req, res) => {
+  slack.summaryRating((error, results) => {
+    if (error) return res.status(400).json(error)
+
+    res.status(200).json(results)
+  })
 })
 
 app.get('/food/today', (req, res) => {

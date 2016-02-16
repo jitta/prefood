@@ -89,17 +89,17 @@ prefoodSchema.statics.getFoodToday = function getFoodToday(callback) {
       $gte: nowDate
     }
   }
-  this.findOne(criteria).exec(callback)
+  this.findOne(criteria).lean().exec(callback)
 
 }
 
 prefoodSchema.statics.getFoodYesterday = function getFoodYesterday(callback) {
-  this.find().limit(2).exec((error, results) => {
+  this.find().limit(2).lean().exec((error, results) => {
     if(error) return callback(error)
     if(results && results.length > 1) {
       return callback(null, results[1])
     }
-    
+
     return callback()
   })
 
