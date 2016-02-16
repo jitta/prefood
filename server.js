@@ -51,6 +51,16 @@ app.get('/food/today', (req, res) => {
   })
 })
 
+app.get('/food/yesterday', (req, res) => {
+  Prefood.getFoodYesterday((error, food) => {
+    if (error) return res.status(400).json(error)
+    var imageList = fs.readdirSync('public/img/card')
+    cardImage = helper.randomArray(imageList)
+    res.render('food_today', {food, cardImage})
+
+  })
+})
+
 app.get('/', (req, res) => {
   res.redirect('/food/today')
 })

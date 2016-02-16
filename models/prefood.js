@@ -93,5 +93,17 @@ prefoodSchema.statics.getFoodToday = function getFoodToday(callback) {
 
 }
 
+prefoodSchema.statics.getFoodYesterday = function getFoodYesterday(callback) {
+  this.find().limit(2).exec((error, results) => {
+    if(error) return callback(error)
+    if(results && results.length > 1) {
+      return callback(null, results[1])
+    }
+    
+    return callback()
+  })
+
+}
+
 Prefood = mongoose.model('prefood', prefoodSchema)
 module.exports = Prefood
