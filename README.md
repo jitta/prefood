@@ -6,6 +6,7 @@
 - [ ] Not run cronjob on holidays
 - [ ] Use google image with food name keywords for use as thumbnail
 - [ ] Write ATDD by Robot framework
+- [ ] Shuffle feedback results
 - [x] Summary rating food today to Slack at 5.00 pm
 - [x] Add food yesterday page
 - [X] Add footer, powered by Jitta Engineer, link to Github
