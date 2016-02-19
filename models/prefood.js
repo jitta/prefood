@@ -62,8 +62,10 @@ prefoodSchema.statics.rateFood = function rateFood (data, callback) {
     }
 
     if (total === 0) {
+      var now = new Date()
       var food = new Prefood({
-        cookedDate: new Date(),
+        cookedDate: now,
+        createdDate: now,
         averageRating: rating.score,
         totalRatings: rating.score,
         ratings: [ rating ]
@@ -94,7 +96,7 @@ prefoodSchema.statics.getFoodToday = function getFoodToday(callback) {
 }
 
 prefoodSchema.statics.getFoodYesterday = function getFoodYesterday(callback) {
-  this.find().limit(2).lean().exec((error, results) => {
+  this.find().sort({cookedDate:-1}).limit(2).lean().exec((error, results) => {
     if(error) return callback(error)
     if(results && results.length > 1) {
       return callback(null, results[1])
