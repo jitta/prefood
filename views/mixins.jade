@@ -34,7 +34,7 @@ mixin leaderboard(ranking)
         - var percentage = (item.averageRating/5) * 100
         .row
           .col.s2
-            h4.valign.center-align= index+1
+            h5.valign.center-align= index+1
           .col.s10 
             .progress
               .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style="width: #{percentage}%")
