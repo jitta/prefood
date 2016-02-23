@@ -1,4 +1,5 @@
 var mongoose = require('mongoose')
+var moment = require('moment')
 var config = require('../config')
 
 mongoose.connect(config.mongodb)
@@ -92,7 +93,18 @@ prefoodSchema.statics.getFoodToday = function getFoodToday(callback) {
     }
   }
   this.findOne(criteria).lean().exec(callback)
+}
 
+prefoodSchema.statics.getFoodByDate = function getFoodByDate(date, callback) {
+  var startDate = moment(new Date(date)).toDate()
+  var endDate = moment(endDate).add(1,'days').toDate()
+  var criteria = {
+    cookedDate: {
+      $gte: startDate,
+      $lt: endDate
+    }
+  }
+  this.findOne(criteria).lean().exec(callback)
 }
 
 prefoodSchema.statics.getFoodYesterday = function getFoodYesterday(callback) {

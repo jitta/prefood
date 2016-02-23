@@ -13,6 +13,16 @@ app.use(bodyParser.urlencoded({
 }))
 app.use(express.static('public'))
 
+app.get('/food/:date', (req, res) => {
+  Prefood.getFoodByDate(req.params.date, (error, food) => {
+    if (error) return res.status(400).json(error)
+    var imageList = fs.readdirSync('public/img/card')
+    cardImage = helper.randomArray(imageList)
+    res.render('food_today', {food, cardImage})
+
+  })
+})
+
 app.post('/food/feedback', (req, res) => {
   Prefood.rateFood(req.body, (error, results) => {
     if (error) return res.status(400).json(error)
@@ -78,7 +88,6 @@ app.get('/', (req, res) => {
 
 app.get('/leaderboard', (req,res) => {
   Prefood.getRanking((error, ranking) => {
-    console.log(ranking);
     res.render('leaderboard', {ranking})
 
   })

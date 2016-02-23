@@ -13,6 +13,7 @@
     "express": "^4.13.4",
     "jade": "^1.11.0",
     "lodash": "^4.3.0",
+    "moment": "^2.11.2",
     "mongoose": "^4.4.3",
     "node-slackr": "^0.1.2"
   }

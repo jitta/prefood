@@ -24,7 +24,7 @@ mixin feedback(type)
         li.collection-header
           h5=header
         each val in shuffle(food.ratings)
-          if val.feedback[type] && val.feedback[type].length > 2
+          if val.feedback && val.feedback[type] && val.feedback[type].length > 2
             li.collection-item= val.feedback[type]
 
 mixin leaderboard(ranking)
@@ -32,12 +32,14 @@ mixin leaderboard(ranking)
     .card-content
       each item, index in ranking
         - var percentage = (item.averageRating/5) * 100
+        - var date = item.cookedDate.getFullYear() + '-' + (item.cookedDate.getMonth() + 1) + '-' + item.cookedDate.getDate()
         .row
           .col.s2
             h5.valign.center-align= index+1
-          .col.s10 
-            .progress
-              .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style="width: #{percentage}%")
-            .undertext
-              .food-name.left= item.foodName || 'ยังไม่ได้เลือกชื่ออาหาร'
-              .average-rating.right= item.averageRating
+          a(href="/food/#{date}" target="_blank")
+            .col.s10 
+              .progress
+                .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style="width: #{percentage}%")
+              .undertext
+                .food-name.left= item.foodName || 'ยังไม่ได้เลือกชื่ออาหาร'
+                .average-rating.right= item.averageRating
