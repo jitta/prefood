@@ -76,6 +76,22 @@ app.get('/', (req, res) => {
   res.redirect('/food/today')
 })
 
+app.get('/leaderboard', (req,res) => {
+  Prefood.getRanking((error, ranking) => {
+    console.log(ranking);
+    res.render('leaderboard', {ranking})
+
+  })
+})
+
+app.get('/test', (req,res) => {
+  Prefood.getRanking((error, ranking) => {
+    console.log(ranking);
+    res.render('test', {ranking})
+
+  })
+})
+
 var port = process.env.PORT || 3002
 app.listen(port, () => {
   console.log(`Prefood listening on ${port}`)

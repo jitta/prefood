@@ -29,3 +29,15 @@ footer.page-footer .img-curry {
 .github-badge {
   display: flex;
 }
+
+.leaderboard .progress-bar {
+  background-color: #37E79C;
+}
+
+.leaderboard .progress {
+  margin-bottom: 5px;
+}
+
+.leaderboard .undertext {
+  color: #BBB;
+}

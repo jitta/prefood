@@ -107,5 +107,15 @@ prefoodSchema.statics.getFoodYesterday = function getFoodYesterday(callback) {
 
 }
 
+prefoodSchema.statics.getRanking = function getRanking(callback) {
+  var projection = {
+    cookedDate: 1,
+    averageRating: 1,
+    foodName: 1
+  }
+  this.find().select(projection).sort('-averageRating').lean().exec(callback)
+
+}
+
 Prefood = mongoose.model('prefood', prefoodSchema)
 module.exports = Prefood
