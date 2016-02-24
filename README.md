@@ -7,6 +7,7 @@
 - [ ] Shorten prefood summary to 2 column
 - [ ] Write ATDD by Robot framework
 - [ ] Shuffle feedback on slack
+- [ ] Can select who is current prefood
 - [x] Leader board food
 - [x] Shuffle feedback on summary page
 - [x] Summary rating food today to Slack at 5.00 pm
