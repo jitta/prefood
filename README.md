@@ -6,6 +6,7 @@
 - [ ] Use google image with food name keywords for use as thumbnail
 - [ ] Shorten prefood summary to 2 column
 - [ ] Write ATDD by Robot framework
+- [ ] Add like and dislike button to feedback
 - [ ] Shuffle feedback on slack
 - [ ] Can select who is current prefood
 - [x] Leader board food
