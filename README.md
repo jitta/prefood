@@ -1,4 +1,10 @@
-### Incoming Features
+## Installtion
+```
+npm install
+npm start
+```
+
+## Incoming Features
 
 - [ ] Better way to pick up food name
 - [ ] Show history food rating
@@ -8,7 +14,7 @@
 - [ ] Write ATDD by Robot framework
 - [ ] Add like and dislike button to feedback
 - [ ] Shuffle feedback on slack
-- [ ] Can select who is current prefood
+- [ ] Show current and choose Prefood Owner
 - [x] Leader board food
 - [x] Shuffle feedback on summary page
 - [x] Summary rating food today to Slack at 5.00 pm
