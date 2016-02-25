@@ -62,9 +62,11 @@ prefoodSchema.statics.rateFood = function rateFood (data, callback) {
       }
     }
 
+    // Create new record
     if (total === 0) {
       var now = new Date()
       var food = new Prefood({
+        foodName: data.food_name,
         cookedDate: now,
         createdDate: now,
         averageRating: rating.score,
@@ -72,10 +74,11 @@ prefoodSchema.statics.rateFood = function rateFood (data, callback) {
         ratings: [ rating ]
       })
       food.save(callback)
-    } else {
+    } else { // Update exist record
       this.findOne(criteria).exec((error, result) => {
         if (error) return callback(error)
         result.ratings.push(rating)
+        result.foodName = data.food_name
         result.totalRatings += rating.score
         result.averageRating = (result.totalRatings / result.ratings.length).toFixed(2)
         result.updatedDate = new Date()

@@ -7,6 +7,7 @@ npm start
 ## Incoming Features
 
 - [ ] Better way to pick up food name
+- [ ] Realtime feedback no longer refresh
 - [ ] Show history food rating
 - [ ] Not run cronjob on holidays
 - [ ] Use google image with food name keywords for use as thumbnail
