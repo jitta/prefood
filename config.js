@@ -1,4 +1,17 @@
+_ = require('lodash')
+
 var config = {
+  defaults: {
+    prefoodFacebookIds: {
+      'Benz': '100000185304733',
+      'Book' : '100000160060555',
+      'Good': '616236141',
+      'Kao' : '1070600293',
+      'Khame': '100000335452062',
+      'Neng' : '1016968028',
+      'Nut': '1167272050'
+    }
+  },
   production: {
     mongodb: process.env.MONGO_URI,
     selfUrl: process.env.selfUrl,
@@ -13,4 +26,5 @@ var config = {
   }
 }
 
-module.exports = config[process.env.NODE_ENV || 'development']
+env = process.env.NODE_ENV || 'development'
+module.exports = _.merge(config[env], config['defaults'])
