@@ -1,8 +1,7 @@
 var mongoose = require('mongoose')
 var moment = require('moment')
+var Setting = require('./setting')
 var config = require('../config')
-
-mongoose.connect(config.mongodb)
 
 var ratingSchema = mongoose.Schema({
   score: {
@@ -19,6 +18,10 @@ var ratingSchema = mongoose.Schema({
 },{_id: false})
 
 var prefoodSchema = mongoose.Schema({
+    prefood: mongoose.Schema({
+      fid: String,
+      name: String
+    }),
     cookedDate: {
       type: Date
     },
@@ -50,41 +53,41 @@ prefoodSchema.statics.rateFood = function rateFood (data, callback) {
       $gte: nowDate
     }
   }
-  this.count(criteria, (error, total) => {
+  this.findOne(criteria, (error, foodToday) => {
     if (error) return callback(error)
-    var rating = {
-      score: parseInt(data.score),
-      feedback: {
-        good: data.feedback_good,
-        bad: data.feedback_bad,
-        improve: data.feedback_improve,
-        foodName: data.food_name
+    Setting.get('prefoodOwner', (error, prefoodOwner) => {
+      if (error) return callback(error)
+      var rating = {
+        score: parseInt(data.score),
+        feedback: {
+          good: data.feedback_good,
+          bad: data.feedback_bad,
+          improve: data.feedback_improve,
+          foodName: data.food_name
+        }
       }
-    }
-
-    // Create new record
-    if (total === 0) {
-      var now = new Date()
-      var food = new Prefood({
-        foodName: data.food_name,
-        cookedDate: now,
-        createdDate: now,
-        averageRating: rating.score,
-        totalRatings: rating.score,
-        ratings: [ rating ]
-      })
-      food.save(callback)
-    } else { // Update exist record
-      this.findOne(criteria).exec((error, result) => {
-        if (error) return callback(error)
-        result.ratings.push(rating)
-        result.foodName = data.food_name
-        result.totalRatings += rating.score
-        result.averageRating = (result.totalRatings / result.ratings.length).toFixed(2)
-        result.updatedDate = new Date()
-        result.save(callback)
-      })
-    }
+      // Create new record
+      if (!foodToday) {
+        var now = new Date()
+        var food = new Prefood({
+          prefood: prefoodOwner,
+          foodName: data.food_name,
+          cookedDate: now,
+          createdDate: now,
+          averageRating: rating.score,
+          totalRatings: rating.score,
+          ratings: [ rating ]
+        })
+        food.save(callback)
+      } else { // Update exist record
+        foodToday.ratings.push(rating)
+        foodToday.foodTodayName = data.foodToday_name
+        foodToday.totalRatings += rating.score
+        foodToday.averageRating = (foodToday.totalRatings / foodToday.ratings.length).toFixed(2)
+        foodToday.updatedDate = new Date()
+        foodToday.save(callback)
+      }
+    })
   })
 }
 
@@ -95,7 +98,7 @@ prefoodSchema.statics.getFoodToday = function getFoodToday(callback) {
       $gte: nowDate
     }
   }
-  this.findOne(criteria).lean().exec(callback)
+  this.findOne(criteria).exec(callback)
 }
 
 prefoodSchema.statics.getFoodByDate = function getFoodByDate(date, callback) {
@@ -131,6 +134,34 @@ prefoodSchema.statics.getRanking = function getRanking(callback) {
   this.find().select(projection).sort('-averageRating').lean().exec(callback)
 
 }
+
+prefoodSchema.statics.changeTodayPrefood = function changeTodayPrefood(fid, callback) {
+  var prefoodFacebookIds = config.prefoodFacebookIds
+  var fids = _.values(prefoodFacebookIds)
+  var hasPrefoodList = _.includes(fids, fid)
+  if (hasPrefoodList) {
+    var name = _.findKey(prefoodFacebookIds, (val) => val == fid)
+    var prefoodValue = {
+      fid: fid,
+      name: name
+    }
+    Setting.set('prefoodOwner', prefoodValue, (error, results) => {
+      if (error) return callback(error)
+      Prefood.getFoodToday((error, food) => {
+        if (error) return callback(error)
+        food.prefood = prefoodValue
+        food.save((error, result) => {
+          if (error) return callback(error)
+          callback(null, results)
+        })
+      })
+    })
+  } else {
+    callback(null, new Error(`Not found prefood facebood id for ${fid}`))
+  }
+}
+
+
 
 Prefood = mongoose.model('prefood', prefoodSchema)
 module.exports = Prefood

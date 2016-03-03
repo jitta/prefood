@@ -6,6 +6,7 @@ npm start
 
 ## Incoming Features
 
+- [x] Show current and choose Prefood Owner
 - [ ] Better way to pick up food name
 - [ ] Realtime feedback no longer refresh
 - [ ] Show history food rating
@@ -15,7 +16,6 @@ npm start
 - [ ] Write ATDD by Robot framework
 - [ ] Add like and dislike button to feedback
 - [ ] Shuffle feedback on slack
-- [ ] Show current and choose Prefood Owner
 - [x] Leader board food
 - [x] Shuffle feedback on summary page
 - [x] Summary rating food today to Slack at 5.00 pm

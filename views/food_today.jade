@@ -11,22 +11,35 @@ html
     link(rel="stylesheet", href="/css/materialize.min.css", type="text/css")
     link(rel="stylesheet", href="/css/main.css", type="text/css")
     link(rel="stylesheet", href="https://fonts.googleapis.com/icon?family=Material+Icons", type="text/css")
+    script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
+    script(type="text/javascript", src="/js/materialize.min.js")
+    script(type="text/javascript", src="/js/main.js")
   body
     .container
       .row
       if !food
-          .col.s12.m5
-            .card-panel.teal
-              span.white-text No one rate food today.
+        .col.s12.m5
+          .card-panel.teal
+            span.white-text No one rate food today.
       else
         .card
           .card-image.waves-block.waves-light
             img.food-cover(src='/img/card/#{cardImage}' height="500")
           .card-content
             .row
-              .col.s12
+              .col.s8
                 span.card-title.activator.grey-text.text-darken-4
                   h4 Food for date <b>#{food.cookedDate.toDateString()}</b>
+              .input-field.col.s4.m3
+                select.prefood.icons
+                  option(value='', disabled='', selected='') Choose current prefood
+                  each fid, name in prefoodFacebookIds
+                    - var selected = fid == (prefoodOwner && prefoodOwner.fid) ? true : false
+                    option.left.circle(value=fid selected=selected data-icon="https://graph.facebook.com/#{fid}/picture") #{name}
+                label Prefood Owner
+
+            .row
+              .col.s12
                 p Total people rate are <b>#{food.ratings.length}</b>
                 p Average rating today is <b>#{food.averageRating}</b>
             +feedback('foodName')
@@ -37,6 +50,4 @@ html
 
     include includes/footer
 
-    script(type="text/javascript", src="https://code.jquery.com/jquery-2.1.1.min.js")
-    script(type="text/javascript", src="/js/materialize.min.js")
     
