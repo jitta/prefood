@@ -16,6 +16,7 @@ npm start
 - [ ] Write ATDD by Robot framework
 - [ ] Add like and dislike button to feedback
 - [ ] Shuffle feedback on slack
+- [ ] Google authentication
 - [x] Leader board food
 - [x] Shuffle feedback on summary page
 - [x] Summary rating food today to Slack at 5.00 pm

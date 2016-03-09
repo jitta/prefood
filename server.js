@@ -78,7 +78,10 @@ app.get('/food/yesterday', (req, res) => {
     if (error) return res.status(400).json(error)
     var imageList = fs.readdirSync('public/img/card')
     cardImage = helper.randomArray(imageList)
-    res.render('food_today', {food, cardImage})
+    Setting.get('prefoodOwner', (error, prefoodOwner) => {
+      if (error) return res.status(400).send({error: error.message})
+      res.render('food_today', {food, cardImage, prefoodOwner: food.prefood, prefoodFacebookIds: config.prefoodFacebookIds})
+    })
 
   })
 })
@@ -88,8 +91,7 @@ app.get('/food/:date', (req, res) => {
     if (error) return res.status(400).json(error)
     var imageList = fs.readdirSync('public/img/card')
     cardImage = helper.randomArray(imageList)
-    res.render('food_today', {food, cardImage})
-
+    res.render('food_today', {food, cardImage, prefoodOwner: food.prefood, prefoodFacebookIds: config.prefoodFacebookIds})
   })
 })
 
