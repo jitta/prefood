@@ -9,7 +9,8 @@ var config = {
       'Kao' : '1070600293',
       'Khame': '100000335452062',
       'Neng' : '1016968028',
-      'Nut': '1167272050'
+      'Nut': '1167272050',
+      'Paul': '695504915'
     }
   },
   production: {
@@ -20,6 +21,7 @@ var config = {
   },
   development: {
     mongodb: 'mongodb://localhost/prefood',
+    mongodb: 'mongodb://heroku_l4z4jfs3:unfp5chu85rhq7klsqc3aespms@ds059115.mongolab.com:59115/heroku_l4z4jfs3',
     selfUrl: 'http://localhost:3002',
     channel: '#testbot',
     slackHookUrl: 'https://hooks.slack.com/services/hook-url'
