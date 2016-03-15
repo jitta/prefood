@@ -41,3 +41,8 @@ footer.page-footer .img-curry {
 .leaderboard .undertext {
   color: #BBB;
 }
+
+.leaderboard img.img-circle {
+  height: 24px;
+  margin-right: 10px;
+}

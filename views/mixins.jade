@@ -41,5 +41,7 @@ mixin leaderboard(ranking)
               .progress
                 .progress-bar(role='progressbar', aria-valuenow='20', aria-valuemin='0', aria-valuemax='100', style="width: #{percentage}%")
               .undertext
-                .food-name.left= item.foodName || 'ยังไม่ได้เลือกชื่ออาหาร'
+                .food-name.left 
+                img(class="img-circle" src="https://graph.facebook.com/#{item.prefood.fid}/picture")
+                span= item.foodName || 'ยังไม่ได้เลือกชื่ออาหาร'
                 .average-rating.right= item.averageRating

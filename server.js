@@ -15,6 +15,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(express.static('public'))
+
+app.use(function(req, res, next) {
+  res.locals.prefoodFacebookIds = config.prefoodFacebookIds
+  next()
+})
 mongoose.connect(config.mongodb)
 
 app.put('/prefood/owner/:fid', (req, res) => {
@@ -68,7 +73,7 @@ app.get('/food/today', (req, res) => {
     var cardImage = helper.randomArray(imageList)
     Setting.get('prefoodOwner', (error, prefoodOwner) => {
       if (error) return res.status(400).send({error: error.message})
-      res.render('food_today', {food, cardImage, prefoodOwner, prefoodFacebookIds: config.prefoodFacebookIds})
+      res.render('food_today', {food, cardImage, prefoodOwner})
     })
   })
 })
@@ -80,7 +85,7 @@ app.get('/food/yesterday', (req, res) => {
     cardImage = helper.randomArray(imageList)
     Setting.get('prefoodOwner', (error, prefoodOwner) => {
       if (error) return res.status(400).send({error: error.message})
-      res.render('food_today', {food, cardImage, prefoodOwner: food.prefood, prefoodFacebookIds: config.prefoodFacebookIds})
+      res.render('food_today', {food, cardImage, prefoodOwner: food.prefood})
     })
 
   })
@@ -91,7 +96,7 @@ app.get('/food/:date', (req, res) => {
     if (error) return res.status(400).json(error)
     var imageList = fs.readdirSync('public/img/card')
     cardImage = helper.randomArray(imageList)
-    res.render('food_today', {food, cardImage, prefoodOwner: food.prefood, prefoodFacebookIds: config.prefoodFacebookIds})
+    res.render('food_today', {food, cardImage, prefoodOwner: food.prefood})
   })
 })
 
@@ -101,8 +106,11 @@ app.get('/', (req, res) => {
 
 app.get('/leaderboard', (req,res) => {
   Prefood.getRanking((error, ranking) => {
-    res.render('leaderboard', {ranking})
+    if (error) {
+      res.status(400).json(error)
+    }
 
+    res.render('leaderboard', {ranking})
   })
 })
 
