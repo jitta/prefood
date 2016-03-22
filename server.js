@@ -1,6 +1,7 @@
 var express = require('express')
 var fs = require('fs')
 var mongoose = require('mongoose')
+var agendaUI = require('agenda-ui')
 var bodyParser = require('body-parser')
 var app = express()
 var Prefood = require('./models/prefood')
@@ -8,6 +9,7 @@ var Setting = require('./models/setting')
 var slack = require('./lib/slack')
 var helper = require('./lib/helper')
 var config = require('./config')
+var agenda = require('./lib/agenda')
 
 app.set('view engine', 'jade')
 app.use(bodyParser.json())
@@ -15,6 +17,12 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 app.use(express.static('public'))
+
+// Waiting agenda to connect db
+setTimeout(()=>{
+  app.use('/agenda', agendaUI(agenda, {poll: false}))
+}, 5000)
+
 
 app.use(function(req, res, next) {
   res.locals.prefoodFacebookIds = config.prefoodFacebookIds
