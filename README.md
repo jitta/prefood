@@ -12,6 +12,7 @@ npm start
 - [ ] Write ATDD by Robot framework
 - [ ] Add like and dislike button to feedback
 - [ ] Google authentication
+- [x] Group score in leader board to same ranking
 - [x] Shuffle feedback on slack
 - [x] Better way to pick up food name
 - [x] Show current and choose Prefood Owner

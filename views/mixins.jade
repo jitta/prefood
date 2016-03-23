@@ -30,12 +30,16 @@ mixin feedback(type)
 mixin leaderboard(ranking)
   .card.leaderboard
     .card-content
+      - var count = 1
       each item, index in ranking
         - var percentage = (item.averageRating/5) * 100
         - var date = item.cookedDate.getFullYear() + '-' + (item.cookedDate.getMonth() + 1) + '-' + item.cookedDate.getDate()
         .row
           .col.s2
-            h5.valign.center-align= index+1
+            if prevAverageRating != item.averageRating
+              h5.valign.center-align= count++
+            else
+              span &nbsp
           a(href="/food/#{date}" target="_blank")
             .col.s10 
               .progress
@@ -45,3 +49,5 @@ mixin leaderboard(ranking)
                 img(class="img-circle" src="https://graph.facebook.com/#{item.prefood.fid}/picture")
                 span= item.foodName || 'ยังไม่ได้เลือกชื่ออาหาร'
                 .average-rating.right= item.averageRating
+                
+        - var prevAverageRating = item.averageRating
